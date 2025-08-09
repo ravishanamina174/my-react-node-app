@@ -1,6 +1,8 @@
+import { SignUp } from "@clerk/clerk-react";
+
 function SignUpPage() {
-    return <main>
-      <h1>Sign Up Page</h1>
+    return <main className="flex justify-center items-center min-h-screen">
+      <SignUp />
     </main>;
   }
   

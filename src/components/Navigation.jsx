@@ -2,7 +2,7 @@ import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
-// import { SignedIn, UserButton, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, UserButton, SignedOut } from "@clerk/clerk-react";
 
 export default function Navigation() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -63,6 +63,9 @@ export default function Navigation() {
               );
             })}
           </nav>
+          <div>
+            <Link to="/admin/products/create"> Create Product </Link>
+          </div>
 
           {/* Icons */}
           <div className="flex items-center space-x-4">
@@ -79,16 +82,16 @@ export default function Navigation() {
                 {cartItemCount}
               </span>
             </Link>
-            {/* <SignedIn>
+            <SignedIn>
               <UserButton />
-            </SignedIn> */}
+            </SignedIn>
             <div className="hidden md:block">
-              {/* <SignedOut> */}
+              <SignedOut>
               <div className="flex items-center gap-4">
                 <Link to="/sign-in"> Sign In </Link>
                 <Link to="/sign-up"> Sign up </Link>
               </div>
-              {/* </SignedOut> */}
+              </SignedOut>
             </div>
 
             {/* Mobile menu button */}
@@ -126,12 +129,12 @@ export default function Navigation() {
           </div>
 
           <div className="block md:hidden px-4">
-            {/* <SignedOut> */}
+            <SignedOut>
             <div className="flex items-center gap-4">
               <Link to="/sign-in"> Sign In </Link>
               <Link to="/sign-up"> Sign up </Link>
             </div>
-            {/* </SignedOut> */}
+            </SignedOut>
           </div>
         </div>
       )}

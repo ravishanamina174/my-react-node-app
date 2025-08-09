@@ -18,7 +18,7 @@ function ShopPage() {
   return (
     <main>
       <h1>Shop Page</h1>
-      {/* <p>{category}</p> */}
+      <p>{category}</p>
       <div>{isLoading ? "Loading" : "Done"}</div>
       <div>{error}</div>
       <div>{JSON.stringify(products)}</div>
