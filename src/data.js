@@ -274,4 +274,37 @@ const categories = [
   },
 ];
 
-export { products, categories };
+const colors = [
+  {
+    _id: "67deec642b2c146578729f2b",
+    name: "Black",
+    hex: "#000000",
+    __v: 0,
+  },
+  {
+    _id: "67deec7f2b2c146578729f2d",
+    name: "Navy",
+    hex: "#1e3a8a",
+    __v: 0,
+  },
+  {
+    _id: "67deec8e2b2c146578729f2f",
+    name: "Gray",
+    hex: "#6b7280",
+    __v: 0,
+  },
+  {
+    _id: "67deecb02b2c146578729f31",
+    name: "White",
+    hex: "#ffffff",
+    __v: 0,
+  },
+  {
+    _id: "67deecd52b2c146578729f33",
+    name: "Red",
+    hex: "#dc2626",
+    __v: 0,
+  },
+];
+
+export { products, categories, colors };

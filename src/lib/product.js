@@ -1,15 +1,10 @@
+import { fetchJSON } from "./http";
+
 export const putImage = async ({ file }) => {
-  const res = await fetch(`http://localhost:8000/api/products/images`, {
+  const { url, publicURL } = await fetchJSON(`/api/products/images`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify({ fileType: file.type }),
   });
-
-  const data = await res.json();
-  const { url, publicURL } = data;
-  console.log(url, publicURL);
 
   const upload = await fetch(url, {
     method: "PUT",
@@ -18,6 +13,11 @@ export const putImage = async ({ file }) => {
     },
     body: file,
   });
+
+  if (!upload.ok) {
+    const text = await upload.text();
+    throw new Error(`Image upload failed: ${upload.status} ${text}`);
+  }
 
   return publicURL;
 };

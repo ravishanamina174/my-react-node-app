@@ -1,20 +1,29 @@
-import { Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import { Menu, X, ShoppingBag, Search, User } from "lucide-react";
 import { useSelector } from "react-redux";
 import { SignedIn, UserButton, SignedOut } from "@clerk/clerk-react";
+import ProductSearchForm from "./ProductSearchForm";
 
 export default function Navigation() {
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state) => state?.cart?.cartItems || []);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const cartItems = useSelector((state) => state.cart.value);
 
   // Calculate total quantity of items in cart
-  const cartItemCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
+  const cartItemCount = cartItems?.reduce(
+    (total, item) => total + (item?.quantity || 0),
     0
-  );
-  console.log(cartItems);
+  ) || 0;
+
+  // const calculateCartItems = () => {
+  //   const total = 0;
+  //   for (let i = 0; i < array.length; i++) {
+  //     const item = array[i];
+  //     total = total + item.quantity;
+  //   }
+  // };
 
   // Function href close mobile menu
   const closeMobileMenu = () => setIsMenuOpen(false);
@@ -30,6 +39,12 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
+            <Link
+              to="/shop"
+              className="font-medium hover:text-gray-600"
+            >
+              Shop
+            </Link>
             {[
               {
                 path: "/shop/shoes",
@@ -63,15 +78,13 @@ export default function Navigation() {
               );
             })}
           </nav>
-          <div>
-            <Link to="/admin/products/create"> Create Product </Link>
-          </div>
+          <Link to="/admin/products/create" className="bg-black text-white px-3 py-1 rounded-md hover:bg-gray-700 transition-colors hidden md:block lg:block">
+               Create Product
+          </Link>
 
           {/* Icons */}
           <div className="flex items-center space-x-4">
-            <button aria-label="Search" className="p-1">
-              <Search size={20} />
-            </button>
+            <ProductSearchForm />
             <Link
               to="/shop/cart"
               aria-label="Shopping Bag"
@@ -82,15 +95,15 @@ export default function Navigation() {
                 {cartItemCount}
               </span>
             </Link>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
             <div className="hidden md:block">
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
               <SignedOut>
-              <div className="flex items-center gap-4">
-                <Link to="/sign-in"> Sign In </Link>
-                <Link to="/sign-up"> Sign up </Link>
-              </div>
+                <div className="flex items-center gap-4">
+                  <Link to="/sign-in">Sign In</Link>
+                  <Link to="/sign-up">Sign Up</Link>
+                </div>
               </SignedOut>
             </div>
 
@@ -108,8 +121,15 @@ export default function Navigation() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden">
+        <div className="md:hidden fixed top-16 left-4 right-4 bg-white z-10">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200">
+            <Link
+              to="/shop"
+              className="block px-3 py-2 text-base font-medium hover:bg-gray-100 rounded-md"
+              onClick={closeMobileMenu}
+            >
+              Shop
+            </Link>
             {[
               { path: "/shop/shoes", label: "Shoes" },
               { path: "/shop/tshirts", label: "T-Shirt" },
@@ -130,10 +150,10 @@ export default function Navigation() {
 
           <div className="block md:hidden px-4">
             <SignedOut>
-            <div className="flex items-center gap-4">
-              <Link to="/sign-in"> Sign In </Link>
-              <Link to="/sign-up"> Sign up </Link>
-            </div>
+              <div className="flex items-center gap-4">
+                <Link to="/sign-in">Sign In</Link>
+                <Link to="/sign-up">Sign Up</Link>
+              </div>
             </SignedOut>
           </div>
         </div>
