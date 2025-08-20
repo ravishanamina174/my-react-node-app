@@ -4,6 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  VITE_BASE_URL = "https://my-backend-w6uw.onrender.com"
 
 [[redirects]]
   from = "/*"
