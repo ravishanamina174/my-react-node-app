@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { useGetAllOrdersQuery } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Package, MapPin, Calendar, User } from "lucide-react";
+import { Package, MapPin, Calendar, User, TrendingUp } from "lucide-react";
+import { useNavigate } from "react-router";
 
 // Utility function to get proper image URL
 function getImageUrl(imagePath) {
@@ -39,6 +40,7 @@ function groupOrdersByDate(orders) {
 
 export default function AllOrdersPage() {
   const { data, isLoading, isError } = useGetAllOrdersQuery();
+  const navigate = useNavigate();
   
   // Handle different response structures
   const orders = data?.orders || data?.data || data || [];
@@ -96,7 +98,16 @@ export default function AllOrdersPage() {
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center">All Orders</h1>
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4">
+          <h1 className="text-4xl font-bold text-gray-900">All Orders</h1>
+          <button
+            onClick={() => navigate('/sales-dashboard')}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition-colors"
+          >
+            <TrendingUp className="w-5 h-5" />
+            Sales Dashboard
+          </button>
+        </div>
 
         <div className="flex flex-col gap-6">
           {grouped.map(([date, orders]) => (

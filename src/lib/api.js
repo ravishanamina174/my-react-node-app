@@ -134,6 +134,14 @@
          query: () => `/orders/allorders`,
          transformResponse: (response) => response,
        }),
+       getSalesLast7Days: build.query({
+         query: () => `/sales/last7days`,
+         transformResponse: (response) => response,
+       }),
+       getSalesLast30Days: build.query({
+         query: () => `/sales/last30days`,
+         transformResponse: (response) => response,
+       }),
        getCheckoutSessionStatus: build.query({
          query: (sessionId) => `/payments/session-status?session_id=${sessionId}`,
        }),
@@ -153,4 +161,6 @@
      useGetAllCategoriesQuery,
      useGetMyOrdersQuery,
      useGetAllOrdersQuery,
+     useGetSalesLast7DaysQuery,
+     useGetSalesLast30DaysQuery,
    } = Api;

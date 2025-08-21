@@ -21,6 +21,7 @@ import CompletePage from "./pages/complete.page";
 import ProductPage from "./pages/ProductPage.jsx";
 import MyOrdersPage from "./pages/myorders.page.jsx";
 import AllOrdersPage from "./pages/allorders.page.jsx";
+import SalesDashboardPage from "./pages/sales-dashboard.page.jsx";
 
 import { ClerkProvider } from "@clerk/clerk-react";
 
@@ -58,6 +59,7 @@ createRoot(document.getElementById("root")).render(
                     element={<CreateProductPage />}
                   />
                   <Route path="/allorders" element={<AllOrdersPage />} />
+                  <Route path="/sales-dashboard" element={<SalesDashboardPage />} />
                 </Route>
               </Route>
             </Route>
