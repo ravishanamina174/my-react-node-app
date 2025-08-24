@@ -69,9 +69,9 @@ function CheckoutPage() {
                     {cart.map((item, index) => (
                       <div key={index} className="flex items-center space-x-3 p-3 border rounded-lg">
                         <div className="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                          {item.product.images && item.product.images[0] ? (
+                          {item.product.image ? (
                             <img 
-                              src={item.product.images[0]} 
+                              src={item.product.image} 
                               alt={item.product.name}
                               className="w-full h-full object-cover rounded-lg"
                             />

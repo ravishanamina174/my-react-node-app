@@ -4,8 +4,9 @@ import { useGetAllCategoriesQuery } from "../lib/api";
 function CreateProductPage() {
     const { data: apiResponse, isLoading, isError } = useGetAllCategoriesQuery();
     
-    // Extract categories array from API response object
-    const categories = apiResponse?.data || [];
+    // Extract categories array from API response object and filter out "All" category
+    const allCategories = apiResponse?.data || [];
+    const categories = allCategories.filter(category => category.name !== "All");
 
     if (isLoading) {
         return (
