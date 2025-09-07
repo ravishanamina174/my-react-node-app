@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { Menu, X, ShoppingBag, Search, User } from "lucide-react";
 import { useSelector } from "react-redux";
-import { SignedIn, UserButton, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, UserButton, SignedOut, useUser } from "@clerk/clerk-react";
 import ProductSearchForm from "./ProductSearchForm";
 
 export default function Navigation() {
   const cartItems = useSelector((state) => state?.cart?.cartItems || []);
+  const { isSignedIn, user } = useUser();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   // const cartItems = useSelector((state) => state.cart.value);
@@ -78,9 +79,14 @@ export default function Navigation() {
               );
             })}
           </nav>
-          <Link to="/admin/products/create" className="bg-black text-white px-3 py-1 rounded-md hover:bg-gray-700 transition-colors hidden md:block lg:block">
-               Create Product
-          </Link>
+          {isSignedIn && user?.publicMetadata?.role === "admin" && (
+            <Link
+              to="/admin/products/create"
+              className="bg-black text-white px-3 py-1 rounded-md hover:bg-gray-700 transition-colors hidden md:block lg:block"
+            >
+              Create Product
+            </Link>
+          )}
 
           {/* Icons */}
           <div className="flex items-center space-x-4">
