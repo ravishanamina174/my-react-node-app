@@ -20,27 +20,28 @@ function SimpleProductCard(props) {
   };
 
   return (
-    <div key={props.product._id}>
-      <div className="h-64 sm:h-72 md:h-80 lg:h-96">
+    <div key={props.product._id} className="rounded-2xl overflow-hidden bg-white/70 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow">
+      <div className="h-52 sm:h-56 md:h-60 lg:h-64">
         <Link to={`/shop/products/${props.product._id}`}>
           <img
             src={props.product.image}
             alt={props.product.name}
-            className="rounded-2xl w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
+            className="w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity"
           />
         </Link>
       </div>
-      <div className="mt-2">
-        <span className="text-lg sm:text-xl md:text-2xl block">
+      <div className="px-3 pt-2">
+        <span className="text-base sm:text-lg md:text-xl block">
           {props.product.name}
         </span>
-        <span className="text-base sm:text-lg md:text-xl block">
+        <span className="text-sm sm:text-base md:text-lg block text-gray-700">
           ${props.product.price}
         </span>
       </div>
-      <div>
+      <div className="px-3 pb-3">
         <Button
-          className={"w-full mt-2"}
+          size="sm"
+          className={"w-full mt-2 rounded-full"}
           onClick={handleAddToCart}
         >
           Add To Cart

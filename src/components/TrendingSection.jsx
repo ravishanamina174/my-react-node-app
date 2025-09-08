@@ -116,7 +116,7 @@ function TrendingSection() {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4 gap-4 md:gap-x-4 md:gap-y-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4 gap-3 md:gap-4 lg:gap-5">
         {filteredProducts?.length > 0 ? (
           filteredProducts.map((product) => {
             return <SimpleProductCard key={product._id} product={product} />;

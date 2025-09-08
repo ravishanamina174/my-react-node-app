@@ -1,7 +1,7 @@
 function HeroGrid() {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 lg:px-16 min-h-[60vh] md:min-h-[80vh] gap-4 mt-4">
-      <div className="relative col-span-1 lg:col-span-2 rounded-2xl">
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-4 lg:px-16 gap-4 lg:gap-5 mt-6">
+      <div className="relative col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow h-[220px] sm:h-[260px] md:h-[300px] lg:h-[360px]">
         <img
           src={"/assets/images/729091cd0452fb9d0b89106ceec16368.png"}
           className="rounded-2xl w-full h-full object-cover"
@@ -18,8 +18,8 @@ function HeroGrid() {
           </p>
         </div>
       </div>
-      <div className="col-span-1 grid grid-rows-1 md:grid-rows-2 gap-4">
-        <div className="rounded-2xl relative h-40 md:h-auto">
+      <div className="col-span-1 md:col-span-2 lg:col-span-1 grid grid-rows-2 gap-4 lg:gap-5">
+        <div className="rounded-2xl relative overflow-hidden shadow-sm hover:shadow-md transition-shadow h-[150px] sm:h-[170px] lg:h-[175px]">
           <img
             src="/assets/images/29a85f64d93c41afa6b64d31b3a88038.png"
             alt="Featured product"
@@ -31,7 +31,7 @@ function HeroGrid() {
             </h1>
           </div>
         </div>
-        <div className="rounded-2xl relative h-40 md:h-auto">
+        <div className="rounded-2xl relative overflow-hidden shadow-sm hover:shadow-md transition-shadow h-[150px] sm:h-[170px] lg:h-[175px]">
           <img
             src="/assets/images/0233936f837e7b69d6a545511b1ba132.png"
             alt="Featured product"
