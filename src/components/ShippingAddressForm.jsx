@@ -86,19 +86,26 @@ function ShippingAddressForm() {
       
       console.log("Order data being sent:", orderData);
       
-      const order = await createOrder(orderData).unwrap();
-      console.log("Order created successfully:", order);
+      const createdOrder = await createOrder(orderData).unwrap();
+      console.log("Order created successfully:", createdOrder);
+      
+      const orderId = createdOrder?._id || createdOrder?.order?._id || createdOrder?.data?._id || createdOrder?.id;
+      if (!orderId) {
+        console.error("Order id missing in response:", createdOrder);
+        alert("Order created but id is missing. Please try again.");
+        return;
+      }
       
       // Store order details in localStorage for the complete page
       localStorage.setItem('currentOrder', JSON.stringify({
-        orderId: order._id,
+        orderId: orderId,
         shippingAddress: values,
         orderItems: cart,
         totalAmount: totalPrice,
       }));
       
-      console.log("Redirecting to payment page with orderId:", order._id);
-      navigate(`/shop/payment?orderId=${order._id}`);
+      console.log("Redirecting to payment page with orderId:", orderId);
+      navigate(`/shop/payment?orderId=${orderId}`);
     } catch (error) {
       console.error("Error creating order:", error);
       

@@ -8,13 +8,23 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const PaymentForm = ({ orderId }) => {
   const fetchClientSecret = useCallback(() => {
+    if (!orderId || orderId === "undefined") {
+      return Promise.reject(new Error("Missing orderId"));
+    }
     return fetch(`${BASE_URL}/api/payments/create-checkout-session`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ orderId }),
       credentials: "include",
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          const text = (await res.text().catch(() => null)) || res.statusText;
+        
+          throw new Error(text || "Failed to start checkout");
+        }
+        return res.json();
+      })
       .then((data) => data.clientSecret);
   }, [orderId]);
 
